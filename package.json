@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/noerdisch/Neos.LinkChecker/issues"
   },
-  "homepage": "https://github.com/noerdisch/Neos.LinkChecker#readme"
+  "homepage": "https://github.com/noerdisch/Neos.LinkChecker#readme",
+  "dependencies": {
+    "commitizen": "^3.0.2"
+  }
 }
