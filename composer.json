@@ -1,0 +1,20 @@
+{
+    "description": "NeosCMS package that is able to crawl the whole page and check the links for broken links",
+    "type": "neos-plugin",
+    "name": "noerdisch/neos.linkchecker",
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "neos/flow": "*",
+        "neos/neos": "~4.0",
+    },
+    "autoload": {
+        "psr-4": {
+            "Noerdisch\\LinkChecker\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Neos.LinkChecker"
+        }
+    }
+}
