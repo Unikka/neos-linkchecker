@@ -1,0 +1,12 @@
+Noerdisch:
+  LinkCecker:
+    url: ''
+    defaultProfile: 'Noerdisch\LinkChecker\Profile\CheckAllLinks'
+    defaultReporter: 'Noerdisch\LinkChecker\Reporter\LogBrokenLinks'
+    concurrency: 10
+    exclude_status_codes: []
+    clientOptions:
+      cookies: true
+      connectionTimeout: 10
+      timeout: 10
+      allowRedirects: false
