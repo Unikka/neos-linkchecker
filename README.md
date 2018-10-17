@@ -19,3 +19,15 @@ Neos package that is able to crawl the whole page and check the links for broken
 ```bash
 composer require noerdisch/neos.linkchecker
 ```
+
+
+## Contribution
+
+We'd love you to contribute to Neos.LinkChecker. We try to make it as easy as possible.
+Therefore the first rule is to follow the [eslint commit message guideline](https://github.com/conventional-changelog-archived-repos/conventional-changelog-eslint/blob/master/convention.md).
+It is really easy, when you always commit via `yarn commit`. Commitizen will guide you.
+
+If you have questions just ping us on twitter or github.
+
+## License
+The GPL-3.0-or-later, please see [License File](LICENSE) for more information.
