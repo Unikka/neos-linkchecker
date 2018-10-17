@@ -4,8 +4,10 @@
     "name": "noerdisch/neos.linkchecker",
     "license": "GPL-3.0-or-later",
     "require": {
+        "php" : "^7.1",
         "neos/flow": "*",
-        "neos/neos": "~4.0"
+        "neos/neos": "~4.0",
+        "spatie/crawler": "^4.1"
     },
     "autoload": {
         "psr-4": {
