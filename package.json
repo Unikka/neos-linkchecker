@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/noerdisch/Neos.LinkChecker#readme",
   "dependencies": {
-    "commitizen": "^3.0.2"
+    "commitizen": "^3.0.2",
+    "conventional-changelog-eslint": "^3.0.0"
   }
 }
