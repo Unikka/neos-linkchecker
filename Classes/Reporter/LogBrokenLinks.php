@@ -16,6 +16,10 @@ use Neos\Flow\Cli\ConsoleOutput;
 use Psr\Http\Message\UriInterface;
 use GuzzleHttp\Exception\RequestException;
 
+/**
+ * Class LogBrokenLinks
+ * @package Noerdisch\LinkChecker\Reporter
+ */
 class LogBrokenLinks extends BaseReporter
 {
     /**

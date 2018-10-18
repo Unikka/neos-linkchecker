@@ -20,6 +20,10 @@ use Noerdisch\LinkChecker\Reporter\LogBrokenLinks;
 use Spatie\Crawler\Crawler;
 use Spatie\Crawler\CrawlObserver;
 
+/**
+ * Class CheckLinksCommandController
+ * @package Noerdisch\LinkChecker\Command
+ */
 class CheckLinksCommandController extends CommandController
 {
     /**

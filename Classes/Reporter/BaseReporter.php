@@ -18,6 +18,10 @@ use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 
+/**
+ * Class BaseReporter
+ * @package Noerdisch\LinkChecker\Reporter
+ */
 abstract class BaseReporter extends CrawlObserver
 {
     const UNRESPONSIVE_HOST = 'Host did not respond';
