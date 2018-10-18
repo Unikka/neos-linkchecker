@@ -23,19 +23,15 @@ class LogBrokenLinks extends BaseReporter
      */
     public function finishedCrawling()
     {
-        $this->outputLine('link checker summary');
+        $this->outputLine('');
+        $this->outputLine('Summary:');
+        $this->outputLine('--------');
 
         collect($this->urlsGroupedByStatusCode)
             ->each(function ($urls, $statusCode) {
-                if ($this->isSuccessOrRedirect($statusCode)) {
-                    return;
-                }
-
                 $count = \count($urls);
-
                 if ($statusCode == static::UNRESPONSIVE_HOST) {
                     $this->outputLine("{$count} url(s) did have unresponsive host(s)");
-
                     return;
                 }
 
@@ -69,6 +65,14 @@ class LogBrokenLinks extends BaseReporter
         );
     }
 
+    /**
+     * Format the error message for crawling problems.
+     *
+     * @param UriInterface $url
+     * @param RequestException $requestException
+     * @param null|UriInterface $foundOnUrl
+     * @return string
+     */
     protected function formatLogMessage(
         UriInterface $url,
         RequestException $requestException,
@@ -76,9 +80,7 @@ class LogBrokenLinks extends BaseReporter
     ): string
     {
         $statusCode = $requestException->getCode();
-
         $reason = $requestException->getMessage();
-
         $logMessage = "{$statusCode} {$reason} - {$url}";
 
         if ($foundOnUrl) {

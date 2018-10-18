@@ -67,10 +67,8 @@ abstract class BaseReporter extends CrawlObserver
     )
     {
         $statusCode = (int)$response->getStatusCode();
-        $this->outputLine("{$url}  ||  {$statusCode}");
-
         if (!$this->isExcludedStatusCode($statusCode)) {
-            $this->urlsGroupedByStatusCode[$statusCode][] = $url;
+            $this->addCrawlingResultToStore($url, $foundOnUrl, $statusCode);
         }
 
         return $statusCode;
@@ -92,12 +90,36 @@ abstract class BaseReporter extends CrawlObserver
     )
     {
         $statusCode = (int)$requestException->getCode();
-
         if (!$this->isExcludedStatusCode($statusCode)) {
-            $this->urlsGroupedByStatusCode[$statusCode][] = $url;
+            $this->addCrawlingResultToStore($url, $foundOnUrl, $statusCode);
         }
 
         return $statusCode;
+    }
+
+    /**
+     * We collect the crawling results in the class variable urlsGroupedByStatusCode.
+     * We store the crawled url, the status code for this url and if a origin url exists also the location where
+     * we got the crawling url from.
+     *
+     * @param UriInterface $crawlingUrl
+     * @param UriInterface $originUrl
+     * @param int $statusCode
+     * @return void
+     */
+    protected function addCrawlingResultToStore($crawlingUrl, $originUrl, $statusCode): void
+    {
+        $cliMessage = "Checked {$crawlingUrl} from {$originUrl} with status {$statusCode}";
+        if ($originUrl === null) {
+            $cliMessage = "Checked {$crawlingUrl} with status {$statusCode}";
+        }
+
+        $this->outputLine($cliMessage);
+        $this->urlsGroupedByStatusCode[$statusCode][] = [
+            'url' => $crawlingUrl,
+            'origin' => $originUrl,
+            'status' => $statusCode
+        ];
     }
 
     /**
