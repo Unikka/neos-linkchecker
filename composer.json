@@ -1,7 +1,7 @@
 {
     "description": "NeosCMS package that is able to crawl the whole page and check the links for broken links",
-    "type": "neos-plugin",
-    "name": "noerdisch/neos.linkchecker",
+    "type": "neos-package",
+    "name": "noerdisch/linkchecker",
     "license": "GPL-3.0-or-later",
     "require": {
         "php" : "^7.1",
@@ -16,7 +16,7 @@
     },
     "extra": {
         "neos": {
-            "package-key": "Neos.LinkChecker"
+            "package-key": "Noerdisch.LinkChecker"
         }
     }
 }
