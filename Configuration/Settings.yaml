@@ -14,23 +14,13 @@ Noerdisch:
 
 
 Neos:
-  Flow:
-    security:
-      authentication:
-        providers:
-          Neos.Neos:Backend:
-            requestPatterns:
-              'Noerdisch.LinkChecker:linkcheckerControllers':
-                pattern: ControllerObjectName
-                patternOptions:
-                  controllerObjectNamePattern: 'Noerdisch\LinkChecker\Controller\.*'
   Neos:
     modules:
       management:
         submodules:
           linkchecker:
             label: 'Link Checker Module'
-            controller: \Noerdisch\LinkChecker\Controller\BackendController
+            controller: 'Noerdisch\LinkChecker\Controller\BackendController'
             description: 'Backend Modules for listing crawling states for URLs and images'
-            icon: icon-link
-            privilegeTarget: 'Noerdisch.LinkChecker:Backend'
+            icon: 'fas fa-link'
+            privilegeTarget: 'Noerdisch.LinkChecker:Backend.Module.Management.LinkChecker'
