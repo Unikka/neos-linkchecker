@@ -1,0 +1,15 @@
+#
+# Security policies for Noerdisch.LinkChecker package
+#
+
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Noerdisch.LinkChecker:Backend':
+      matcher: 'method(Noerdisch\LinkChecker\Controller\BackendController->(index)Action())'
+
+roles:
+  'Neos.Neos:AbstractEditor':
+    privileges:
+    -
+      privilegeTarget: 'Noerdisch.LinkChecker:Backend'
+      permission: GRANT
