@@ -18,7 +18,6 @@ use Neos\Flow\Cli\CommandController;
 use Noerdisch\LinkChecker\Profile\CheckAllLinks;
 use Noerdisch\LinkChecker\Reporter\LogBrokenLinks;
 use Spatie\Crawler\Crawler;
-use Spatie\Crawler\CrawlObserver;
 
 /**
  * Class CheckLinksCommandController
@@ -37,7 +36,7 @@ class CheckLinksCommandController extends CommandController
      * @param string $url
      * @param int $concurrency
      */
-    public function crawlCommand($url, $concurrency = 10)
+    public function crawlCommand($url, $concurrency = 10): void
     {
         $crawlProfile = new CheckAllLinks();
         $clientOptions = [
@@ -59,7 +58,7 @@ class CheckLinksCommandController extends CommandController
             $this->outputLine("Start scanning {$url}");
             $this->outputLine('');
             $crawler->startCrawling($crawlingUrl);
-        } catch(\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException $exception) {
             $this->outputLine('ERROR:  ' . $exception->getMessage());
         }
 

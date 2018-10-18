@@ -12,7 +12,6 @@ namespace Noerdisch\LinkChecker\Reporter;
  * source code.
  */
 
-use Neos\Flow\Cli\ConsoleOutput;
 use Psr\Http\Message\UriInterface;
 use GuzzleHttp\Exception\RequestException;
 
@@ -24,8 +23,10 @@ class LogBrokenLinks extends BaseReporter
 {
     /**
      * Called when the crawl has ended.
+     *
+     * @return void
      */
-    public function finishedCrawling()
+    public function finishedCrawling(): void
     {
         $this->outputLine('');
         $this->outputLine('Summary:');
@@ -39,7 +40,7 @@ class LogBrokenLinks extends BaseReporter
                     return;
                 }
 
-                $this->outputLine("Crawled {$count} url(s) with statuscode {$statusCode}");
+                $this->outputLine("Crawled {$count} url(s) with status code {$statusCode}");
             });
     }
 
@@ -49,24 +50,26 @@ class LogBrokenLinks extends BaseReporter
      * @param \Psr\Http\Message\UriInterface $url
      * @param \GuzzleHttp\Exception\RequestException $requestException
      * @param \Psr\Http\Message\UriInterface|null $foundOnUrl
+     *
+     * @return int
      */
     public function crawlFailed(
         UriInterface $url,
         RequestException $requestException,
         ?UriInterface $foundOnUrl = null
-    )
+    ): int
     {
         parent::crawlFailed($url, $requestException, $foundOnUrl);
-
         $statusCode = $requestException->getCode();
-
         if ($this->isExcludedStatusCode($statusCode)) {
-            return;
+            return 0;
         }
 
         $this->outputLine(
             $this->formatLogMessage($url, $requestException, $foundOnUrl)
         );
+
+        return $statusCode;
     }
 
     /**

@@ -50,11 +50,11 @@ class ResultItemRepository extends Repository
      */
     public function findExistingItems($url, $originUrl)
     {
-        $constaints = [];
+        $constraints = [];
         $query = $this->createQuery();
 
-        $constaints[] = $query->equals('url', trim($url));
-        $constaints[] = $query->equals('originUrl', trim($originUrl));
-        return $query->matching($query->logicalAnd($constaints))->execute()->getFirst();
+        $constraints[] = $query->equals('url', trim($url));
+        $constraints[] = $query->equals('originUrl', trim($originUrl));
+        return $query->matching($query->logicalAnd($constraints))->execute()->getFirst();
     }
 }

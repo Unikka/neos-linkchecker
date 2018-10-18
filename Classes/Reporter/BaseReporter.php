@@ -58,7 +58,7 @@ abstract class BaseReporter extends CrawlObserver
      * @see output()
      * @see outputLines()
      */
-    protected function outputLine(string $text = '', array $arguments = [])
+    protected function outputLine(string $text = '', array $arguments = []): void
     {
         $this->output->outputLine($text, $arguments);
     }
@@ -99,7 +99,7 @@ abstract class BaseReporter extends CrawlObserver
         UriInterface $url,
         RequestException $requestException,
         ?UriInterface $foundOnUrl = null
-    )
+    ): int
     {
         $statusCode = (int)$requestException->getCode();
         if (!$this->isExcludedStatusCode($statusCode)) {
@@ -139,7 +139,7 @@ abstract class BaseReporter extends CrawlObserver
     }
 
     /**
-     * Determine if the statuscode concerns a successful or
+     * Determine if the status code concerns a successful or
      * redirect response.
      *
      * @param int|string $statusCode
@@ -162,7 +162,7 @@ abstract class BaseReporter extends CrawlObserver
     }
 
     /**
-     * Determine if the statuscode should be excluded'
+     * Determine if the status code should be excluded'
      * from the reporter.
      *
      * @todo make the exclude configurable
