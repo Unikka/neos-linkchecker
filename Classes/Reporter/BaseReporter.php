@@ -12,7 +12,11 @@ namespace Noerdisch\LinkChecker\Reporter;
  * source code.
  */
 
+use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\ConsoleOutput;
+use Neos\Flow\Persistence\Exception\IllegalObjectTypeException;
+use Noerdisch\LinkChecker\Domain\Model\ResultItem;
+use Noerdisch\LinkChecker\Domain\Repository\ResultItemRepository;
 use Spatie\Crawler\CrawlObserver;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -24,7 +28,11 @@ use GuzzleHttp\Exception\RequestException;
  */
 abstract class BaseReporter extends CrawlObserver
 {
-    const UNRESPONSIVE_HOST = 'Host did not respond';
+    /**
+     * @Flow\Inject
+     * @var ResultItemRepository
+     */
+    protected $resultItemRepository;
 
     /**
      * @var ConsoleOutput
@@ -34,7 +42,7 @@ abstract class BaseReporter extends CrawlObserver
     /**
      * @var array
      */
-    protected $urlsGroupedByStatusCode = [];
+    protected $resultItemsGroupedByStatusCode = [];
 
     public function __construct()
     {
@@ -119,11 +127,15 @@ abstract class BaseReporter extends CrawlObserver
         }
 
         $this->outputLine($cliMessage);
-        $this->urlsGroupedByStatusCode[$statusCode][] = [
-            'url' => $crawlingUrl,
-            'origin' => $originUrl,
-            'status' => $statusCode
-        ];
+        $linkCheckItem = new ResultItem($crawlingUrl, $originUrl, $statusCode);
+
+        try {
+            $this->resultItemRepository->addOrUpdate($linkCheckItem);
+        } catch (IllegalObjectTypeException $e) {
+            $this->outputLine("Could not persist entry for the url {$crawlingUrl}");
+        }
+
+        $this->resultItemsGroupedByStatusCode[$statusCode][] = $linkCheckItem;
     }
 
     /**
@@ -144,7 +156,7 @@ abstract class BaseReporter extends CrawlObserver
      */
     protected function crawledBadUrls(): bool
     {
-        return collect($this->urlsGroupedByStatusCode)->keys()->filter(function ($statusCode) {
+        return collect($this->resultItemsGroupedByStatusCode)->keys()->filter(function ($statusCode) {
                 return !$this->isSuccessOrRedirect($statusCode);
             })->count() > 0;
     }

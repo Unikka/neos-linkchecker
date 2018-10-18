@@ -31,10 +31,10 @@ class LogBrokenLinks extends BaseReporter
         $this->outputLine('Summary:');
         $this->outputLine('--------');
 
-        collect($this->urlsGroupedByStatusCode)
+        collect($this->resultItemsGroupedByStatusCode)
             ->each(function ($urls, $statusCode) {
                 $count = \count($urls);
-                if ($statusCode == static::UNRESPONSIVE_HOST) {
+                if ($statusCode < 100) {
                     $this->outputLine("{$count} url(s) did have unresponsive host(s)");
                     return;
                 }

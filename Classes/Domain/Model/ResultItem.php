@@ -13,6 +13,8 @@ namespace Noerdisch\LinkChecker\Domain\Model;
  */
 
 use Neos\Flow\Annotations as Flow;
+use Noerdisch\LinkChecker\Service\UriService;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Model ResultItem
@@ -50,11 +52,17 @@ class ResultItem
 
     /**
      * ResultItem constructor.
+     * @param UriInterface $url
+     * @param UriInterface $originUrl
+     * @param int $statusCode
      */
-    public function __construct()
+    public function __construct($url, $originUrl, $statusCode)
     {
         $this->createdAt = new \DateTime();
         $this->checkedAt = new \DateTime();
+        $this->setUrl(UriService::uriToString($url));
+        $this->setOriginUrl(UriService::uriToString($originUrl));
+        $this->setStatusCode($statusCode);
     }
 
     /**

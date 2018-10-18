@@ -14,10 +14,47 @@ namespace Noerdisch\LinkChecker\Domain\Repository;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\Doctrine\Repository;
+use Noerdisch\LinkChecker\Domain\Model\ResultItem;
 
 /**
  * @Flow\Scope("singleton")
  */
 class ResultItemRepository extends Repository
 {
+    /**
+     * Adds or updates the given result item to the database.
+     * Existing items should have the same url and origin url.
+     *
+     * @param ResultItem $object
+     * @return void
+     * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
+     */
+    public function addOrUpdate($object): void
+    {
+        $existingResultItem = $this->findExistingItems($object->getUrl(), $object->getOriginUrl());
+        if ($existingResultItem instanceof ResultItem) {
+            $existingResultItem->setCheckedAt($object->getCheckedAt());
+            $existingResultItem->setStatusCode($object->getStatusCode());
+            $this->update($existingResultItem);
+        } else {
+            $this->add($object);
+        }
+    }
+
+    /**
+     * Returns ResultItem if the combination of url and origin url already exists.
+     *
+     * @param string $url
+     * @param string $originUrl
+     * @return object
+     */
+    public function findExistingItems($url, $originUrl)
+    {
+        $constaints = [];
+        $query = $this->createQuery();
+
+        $constaints[] = $query->equals('url', trim($url));
+        $constaints[] = $query->equals('originUrl', trim($originUrl));
+        return $query->matching($query->logicalAnd($constaints))->execute()->getFirst();
+    }
 }
