@@ -1,0 +1,14 @@
+#
+# Security policies for Noerdisch.LinkChecker package
+#
+privilegeTargets:
+  'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
+    'Noerdisch.LinkChecker:Backend.Module.Management.LinkChecker':
+      matcher: 'management/linkchecker'
+
+roles:
+  'Neos.Neos:AbstractEditor':
+    privileges:
+    -
+      privilegeTarget: 'Noerdisch.LinkChecker:Backend.Module.Management.LinkChecker'
+      permission: GRANT

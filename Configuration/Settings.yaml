@@ -1,0 +1,26 @@
+Noerdisch:
+  LinkChecker:
+    url: ''
+    defaultProfile: 'Noerdisch\LinkChecker\Profile\CheckAllLinks'
+    defaultReporter: 'Noerdisch\LinkChecker\Reporter\LogBrokenLinks'
+    concurrency: 10
+    ignoreRobots: true
+    exclude_status_codes: []
+    clientOptions:
+      cookies: true
+      connectionTimeout: 10
+      timeout: 10
+      allowRedirects: false
+
+
+Neos:
+  Neos:
+    modules:
+      management:
+        submodules:
+          linkchecker:
+            label: 'Link Checker Module'
+            controller: 'Noerdisch\LinkChecker\Controller\BackendController'
+            description: 'Backend Modules for listing crawling states for URLs and images'
+            icon: 'fas fa-link'
+            privilegeTarget: 'Noerdisch.LinkChecker:Backend.Module.Management.LinkChecker'
