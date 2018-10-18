@@ -37,7 +37,7 @@ class CheckLinksCommandController extends CommandController
      * @param string $url
      * @param int $concurrency
      */
-    public function crawlCommand($url, $concurrency)
+    public function crawlCommand($url, $concurrency = 10)
     {
         $crawlProfile = new CheckAllLinks();
         $clientOptions = [
@@ -48,8 +48,11 @@ class CheckLinksCommandController extends CommandController
         $crawler = Crawler::create($clientOptions)
             ->setConcurrency($this->getConcurrency($concurrency))
             ->setCrawlObserver(new LogBrokenLinks())
-            ->setCrawlProfile($crawlProfile)
-            ->ignoreRobots();
+            ->setCrawlProfile($crawlProfile);
+
+        if ($this->shouldIgnoreRobots()) {
+            $crawler->ignoreRobots();
+        }
 
         try {
             $crawlingUrl = $this->getCrawlingUrl($url);
@@ -103,5 +106,15 @@ class CheckLinksCommandController extends CommandController
         }
 
         return 10;
+    }
+
+    /**
+     * Returns true by default and can be changed by the setting Noerdisch.LinkChecker.ignoreRobots
+     *
+     * @return bool
+     */
+    protected function shouldIgnoreRobots(): bool
+    {
+        return isset($this->settings['ignoreRobots']) ? (bool)$this->settings['ignoreRobots'] : true;
     }
 }
