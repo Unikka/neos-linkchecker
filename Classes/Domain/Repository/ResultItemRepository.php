@@ -57,4 +57,25 @@ class ResultItemRepository extends Repository
         $constraints[] = $query->equals('originUrl', trim($originUrl));
         return $query->matching($query->logicalAnd($constraints))->execute()->getFirst();
     }
+
+    /**
+     * Returns array of existing status codes in the result item table.
+     *
+     * @return array
+     */
+    public function findAllStatusCodes()
+    {
+        $dql = "SELECT DISTINCT t.statusCode FROM Noerdisch\LinkChecker\Domain\Model\ResultItem t";
+        $statusCodes = $this->createDqlQuery($dql)->getArrayResult();
+
+        $existingStatusCodes = [];
+        foreach ($statusCodes as $statusCode) {
+            if (!isset($statusCode['statusCode'])) {
+                continue;
+            }
+
+            $existingStatusCodes[] = (int)$statusCode['statusCode'];
+        }
+        return $existingStatusCodes;
+    }
 }

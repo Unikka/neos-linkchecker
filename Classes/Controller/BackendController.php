@@ -22,6 +22,8 @@ use Noerdisch\LinkChecker\Domain\Repository\ResultItemRepository;
  */
 class BackendController extends AbstractModuleController
 {
+    public const DEFAULT_STATUS_CODE = 404;
+
     /**
      * @Flow\Inject
      * @var ResultItemRepository
@@ -31,9 +33,35 @@ class BackendController extends AbstractModuleController
     /**
      * Index action of backend module
      * Lists the result items
+     *
+     * @param int $statusCode
+     *
+     * @return void
      */
-    public function indexAction()
+    public function indexAction($statusCode = 0): void
     {
-        $this->view->assign('exampleValue', 'Hello World');
+        $resultItems = $this->resultItemRepository->findByStatusCode($statusCode)->toArray();
+        $this->view->assignMultiple([
+            'resultItems' => $resultItems,
+            'statusCodes' => $this->getStatusCodes($statusCode),
+            'activeStatusCode' => $statusCode < 100 ? self::DEFAULT_STATUS_CODE : $statusCode
+        ]);
+    }
+
+    /**
+     * Return the existing status codes as array. If we have no initial code we also add the default value.
+     * This is 404 for error pages.
+     *
+     * @param int $statusCode
+     * @return array
+     */
+    protected function getStatusCodes($statusCode) {
+        if ((int) $statusCode < 100) {
+            $statusCode = self::DEFAULT_STATUS_CODE;
+        }
+
+        $existingStatusCodes = $this->resultItemRepository->findAllStatusCodes();
+        $existingStatusCodes[] = $statusCode;
+        return array_unique($existingStatusCodes);
     }
 }

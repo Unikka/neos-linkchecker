@@ -1,0 +1,15 @@
+<table class="neos-table">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Quelle</th>
+      <th>Status</th>
+      <th>Letzte Prüfung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <f:for as="item" each="{items}">
+      <f:render partial="Listing/TableRow" arguments="{item: item}" />
+    </f:for>
+  </tbody>
+</table>
