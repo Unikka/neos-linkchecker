@@ -31,9 +31,19 @@ class BackendController extends AbstractModuleController
     /**
      * Index action of backend module
      * Lists the result items
+     *
+     * @param int $statusCode
+     *
+     * @return void
      */
-    public function indexAction()
+    public function indexAction($statusCode = 404): void
     {
-        $this->view->assign('exampleValue', 'Hello World');
+        $resultItems = $this->resultItemRepository->findByStatusCode($statusCode)->toArray();
+        $existingStatusCodes = [200, 301, 404, 500];
+        $this->view->assignMultiple([
+            'resultItems' => $resultItems,
+            'statusCodes' => $existingStatusCodes,
+            'activeStatusCode' => $statusCode
+        ]);
     }
 }

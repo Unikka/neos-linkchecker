@@ -1,0 +1,10 @@
+<tr>
+  <td>
+    <f:format.crop maxCharacters="75">{item.url}</f:format.crop>
+  </td>
+  <td>
+    <f:format.crop maxCharacters="75">{item.originUrl}</f:format.crop>
+  </td>
+  <td>{item.statusCode}</td>
+  <td>{item.checkedAt -> f:format.date(format: 'H:i - d.m.Y')}</td>
+</tr>

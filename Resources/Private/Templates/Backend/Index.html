@@ -1,5 +1,21 @@
 <f:layout name="BackendModule"/>
 
 <f:section name="content">
-  Foo {exampleValue}
+  <f:for as="statusCode" each="{statusCodes}">
+    <f:link.action
+      action="index"
+      controller="Backend"
+      arguments="{statusCode: statusCode}"
+      class="neos-button {f:if(condition: '{statusCode} === {activeStatusCode}', then: 'neos-active', else: '')}"
+    >
+      {statusCode}
+    </f:link.action>
+  </f:for>
+
+  <f:if condition="{resultItems -> f:count()} > 0">
+    <f:then>
+      <f:render partial="Listing/Table" arguments="{items: resultItems}"/>
+    </f:then>
+    <f:else>No Items for the status code has been found.</f:else>
+  </f:if>
 </f:section>
