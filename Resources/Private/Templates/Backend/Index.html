@@ -16,6 +16,8 @@
     <f:then>
       <f:render partial="Listing/Table" arguments="{items: resultItems}"/>
     </f:then>
-    <f:else>No Items for the status code has been found.</f:else>
+    <f:else>
+      <div class=​"neos-row-fluid">​No Items for the status code has been found.</div>
+    </f:else>
   </f:if>
 </f:section>
