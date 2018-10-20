@@ -39,10 +39,7 @@ class CheckLinksCommandController extends CommandController
     public function crawlCommand($url = '', $concurrency = 10): void
     {
         $crawlProfile = new CheckAllLinks();
-        $clientOptions = [
-            RequestOptions::TIMEOUT => 100,
-            RequestOptions::ALLOW_REDIRECTS => false,
-        ];
+        $clientOptions = $this->getClientOptions();
 
         $crawler = Crawler::create($clientOptions)
             ->setConcurrency($this->getConcurrency($concurrency))
@@ -115,5 +112,45 @@ class CheckLinksCommandController extends CommandController
     protected function shouldIgnoreRobots(): bool
     {
         return isset($this->settings['ignoreRobots']) ? (bool)$this->settings['ignoreRobots'] : true;
+    }
+
+    /**
+     * Get client options for the guzzle client from the settings. If no settings are configured we just set
+     * timeout and allow_redirect.
+     *
+     * @return array
+     */
+    protected function getClientOptions()
+    {
+        $clientOptions = [
+            RequestOptions::TIMEOUT => 100,
+            RequestOptions::ALLOW_REDIRECTS => false,
+        ];
+
+        $optionsSettings = $this->settings['clientOptions'] ?? [];
+        if (isset($optionsSettings['cookies']) &&\is_bool($optionsSettings['cookies'])) {
+            $clientOptions[RequestOptions::COOKIES] = $optionsSettings['cookies'];
+        }
+
+        if (isset($optionsSettings['connectionTimeout']) && \is_numeric($optionsSettings['connectionTimeout'])) {
+            $clientOptions[RequestOptions::CONNECT_TIMEOUT] = $optionsSettings['connectionTimeout'];
+        }
+
+        if (isset($optionsSettings['timeout']) && \is_numeric($optionsSettings['timeout'])) {
+            $clientOptions[RequestOptions::TIMEOUT] = $optionsSettings['timeout'];
+        }
+
+        if (isset($optionsSettings['allowRedirects']) && \is_bool($optionsSettings['allowRedirects'])) {
+            $clientOptions[RequestOptions::ALLOW_REDIRECTS] = $optionsSettings['allowRedirects'];
+        }
+
+        if (
+            isset($optionsSettings['auth']) && \is_array($optionsSettings['auth']) &&
+            \count($optionsSettings['auth']) > 1
+        ) {
+            $clientOptions[RequestOptions::AUTH] = $optionsSettings['auth'];
+        }
+
+        return $clientOptions;
     }
 }
