@@ -36,7 +36,7 @@ class CheckLinksCommandController extends CommandController
      * @param string $url
      * @param int $concurrency
      */
-    public function crawlCommand($url, $concurrency = 10): void
+    public function crawlCommand($url = '', $concurrency = 10): void
     {
         $crawlProfile = new CheckAllLinks();
         $clientOptions = [
@@ -55,7 +55,7 @@ class CheckLinksCommandController extends CommandController
 
         try {
             $crawlingUrl = $this->getCrawlingUrl($url);
-            $this->outputLine("Start scanning {$url}");
+            $this->outputLine("Start scanning {$crawlingUrl}");
             $this->outputLine('');
             $crawler->startCrawling($crawlingUrl);
         } catch (\InvalidArgumentException $exception) {
@@ -75,7 +75,7 @@ class CheckLinksCommandController extends CommandController
     protected function getCrawlingUrl($url): string
     {
         $crawlingUrl = trim($url) !== '' ? $url : '';
-        if (isset($this->settings['url']) && $this->settings['url'] !== '') {
+        if ($crawlingUrl === '' && isset($this->settings['url']) && $this->settings['url'] !== '') {
             $crawlingUrl = trim($this->settings['url']);
         }
 
