@@ -5,7 +5,7 @@ Noerdisch:
     defaultReporter: 'Noerdisch\LinkChecker\Reporter\LogBrokenLinks'
     concurrency: 10
     ignoreRobots: true
-    exclude_status_codes: []
+    excludeStatusCodes: []
     clientOptions:
       cookies: true
       connectionTimeout: 10
