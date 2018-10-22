@@ -44,6 +44,14 @@ abstract class BaseReporter extends CrawlObserver
      */
     protected $resultItemsGroupedByStatusCode = [];
 
+    /**
+     * @return array
+     */
+    public function getResultItemsGroupedByStatusCode(): array
+    {
+        return $this->resultItemsGroupedByStatusCode;
+    }
+
     public function __construct()
     {
         $this->output = new ConsoleOutput();

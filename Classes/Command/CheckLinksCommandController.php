@@ -17,6 +17,7 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
 use Noerdisch\LinkChecker\Profile\CheckAllLinks;
 use Noerdisch\LinkChecker\Reporter\LogBrokenLinks;
+use Noerdisch\LinkChecker\Service\NotificationServiceInterface;
 use Spatie\Crawler\Crawler;
 
 /**
@@ -25,11 +26,37 @@ use Spatie\Crawler\Crawler;
  */
 class CheckLinksCommandController extends CommandController
 {
+    public const MIN_STATUS_CODE = 404;
+
     /**
      * @Flow\InjectConfiguration(package="Noerdisch.LinkChecker")
      * @var array
      */
     protected $settings;
+
+    /**
+     * @var array
+     * @Flow\InjectConfiguration(path="notifications.enabled")
+     */
+    protected $notificationEnabled;
+
+    /**
+     * @var array
+     * @Flow\InjectConfiguration(path="notifications.service")
+     */
+    protected $notificationServiceClass;
+
+    /**
+     * @var int
+     * @Flow\InjectConfiguration(path="notifications.minimumStatusCode")
+     */
+    protected $minimumStatusCode;
+
+    /**
+     * @var int
+     * @Flow\InjectConfiguration(path="notifications.subject")
+     */
+    protected $subject;
 
     /**
      *
@@ -39,11 +66,12 @@ class CheckLinksCommandController extends CommandController
     public function crawlCommand($url = '', $concurrency = 10): void
     {
         $crawlProfile = new CheckAllLinks();
+        $crawlObserver = new LogBrokenLinks();
         $clientOptions = $this->getClientOptions();
 
         $crawler = Crawler::create($clientOptions)
             ->setConcurrency($this->getConcurrency($concurrency))
-            ->setCrawlObserver(new LogBrokenLinks())
+            ->setCrawlObserver($crawlObserver)
             ->setCrawlProfile($crawlProfile);
 
         if ($this->shouldIgnoreRobots()) {
@@ -55,6 +83,10 @@ class CheckLinksCommandController extends CommandController
             $this->outputLine("Start scanning {$crawlingUrl}");
             $this->outputLine('');
             $crawler->startCrawling($crawlingUrl);
+
+            if ($this->notificationEnabled) {
+                $this->sendNotification($crawlObserver->getResultItemsGroupedByStatusCode());
+            }
         } catch (\InvalidArgumentException $exception) {
             $this->outputLine('ERROR:  ' . $exception->getMessage());
         }
@@ -120,7 +152,7 @@ class CheckLinksCommandController extends CommandController
      *
      * @return array
      */
-    protected function getClientOptions()
+    protected function getClientOptions(): array
     {
         $clientOptions = [
             RequestOptions::TIMEOUT => 100,
@@ -128,7 +160,7 @@ class CheckLinksCommandController extends CommandController
         ];
 
         $optionsSettings = $this->settings['clientOptions'] ?? [];
-        if (isset($optionsSettings['cookies']) &&\is_bool($optionsSettings['cookies'])) {
+        if (isset($optionsSettings['cookies']) && \is_bool($optionsSettings['cookies'])) {
             $clientOptions[RequestOptions::COOKIES] = $optionsSettings['cookies'];
         }
 
@@ -152,5 +184,41 @@ class CheckLinksCommandController extends CommandController
         }
 
         return $clientOptions;
+    }
+
+    /**
+     * Send notification about the result of the link check run. The notification service can be configured.
+     * Default is the emailService.
+     *
+     * @return void
+     */
+    protected function sendNotification(array $results): void
+    {
+        $notificationServiceClass = trim((string)$this->notificationServiceClass);
+        if ($notificationServiceClass === '') {
+            $errorMessage = 'No notification service has been configured, but the notification handling is enabled';
+            throw new \InvalidArgumentException($errorMessage, 1540201992);
+        }
+
+        $minimumStatusCode = \is_numeric($this->minimumStatusCode) ? $this->minimumStatusCode : self::MIN_STATUS_CODE;
+        $arguments = [
+            'urls' => [],
+            'statusCodes' => []
+        ];
+        foreach ($results as $statusCode => $urls) {
+            if ($statusCode < $minimumStatusCode) {
+                continue;
+            }
+
+            $arguments['result'][$statusCode] = [
+                'statusCode' => $statusCode,
+                'urls' => $urls,
+                'amount' => \count($urls)
+            ];
+        }
+
+        /** @var NotificationServiceInterface $notificationService */
+        $notificationService = $this->objectManager->get($notificationServiceClass);
+        $notificationService->sendNotification($this->subject, $arguments);
     }
 }

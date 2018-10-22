@@ -12,6 +12,26 @@ Noerdisch:
       timeout: 10
       allowRedirects: false
       auth: []
+    notifications:
+      enabled: true
+      service: 'Noerdisch\LinkChecker\Service\EmailService'
+      subject: 'Link checker results'
+      minimumStatusCode: 400
+      mail:
+        sender:
+          default:
+            name: 'Noerdisch'
+            address: 'test@example.com'
+        recipient:
+          default:
+            name: 'Noerdisch'
+            address: 'test@example.com'
+        template:
+          package: 'Noerdisch.LinkChecker'
+          file: 'NotificationMail'
+        logging:
+          errors: log
+          success: log
 
 
 Neos:

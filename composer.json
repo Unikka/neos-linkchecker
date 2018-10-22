@@ -7,6 +7,7 @@
         "php" : "^7.1",
         "neos/flow": "*",
         "neos/neos": "~4.0",
+        "neos/swiftmailer": "^6.0",
         "spatie/crawler": "^4.1"
     },
     "autoload": {
