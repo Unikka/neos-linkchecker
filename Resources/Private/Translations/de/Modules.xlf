@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="Noerdisch.LinkChecker" source-language="de" datatype="plaintext">
+        <body>
+            <trans-unit id="backend.module.table.header.url" xml:space="preserve" approved="yes">
+                <source>URL</source>
+            </trans-unit>
+            <trans-unit id="backend.module.table.header.origin" xml:space="preserve" approved="yes">
+                <source>Quelle</source>
+            </trans-unit>
+            <trans-unit id="backend.module.table.header.status" xml:space="preserve" approved="yes">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="backend.module.table.header.latest_check" xml:space="preserve" approved="yes">
+                <source>Letzte Prüfung</source>
+            </trans-unit>
+            <trans-unit id="backend.module.no_items" xml:space="preserve" approved="yes">
+                <source>Es wurden keine Eintrage mit diesen Status gefunden.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
