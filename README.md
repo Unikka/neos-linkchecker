@@ -4,8 +4,8 @@
     </a>
 </p>
 
-[![Packagist](https://img.shields.io/packagist/l/noerdisch/neos.linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/neos.linkchecker)
-[![Packagist](https://img.shields.io/packagist/v/noerdisch/neos.linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/neos.linkchecker)
+[![Packagist](https://img.shields.io/packagist/l/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/neos.linkchecker)
+[![Packagist](https://img.shields.io/packagist/v/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/neos.linkchecker)
 [![Twitter Follow](https://img.shields.io/twitter/follow/noerdisch.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/noerdisch)
 
 # Neos.LinkChecker
@@ -17,7 +17,7 @@ Neos package that is able to crawl the whole page and check the links for broken
 ## Installation
 
 ```bash
-composer require noerdisch/neos.linkchecker
+composer require noerdisch/linkchecker
 ```
 
 
