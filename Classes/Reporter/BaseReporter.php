@@ -41,6 +41,12 @@ abstract class BaseReporter extends CrawlObserver
 
     /**
      * @var array
+     * @Flow\InjectConfiguration(path="excludeStatusCodes")
+     */
+    protected $excludeStatusCodes;
+
+    /**
+     * @var array
      */
     protected $resultItemsGroupedByStatusCode = [];
 
@@ -173,14 +179,13 @@ abstract class BaseReporter extends CrawlObserver
      * Determine if the status code should be excluded'
      * from the reporter.
      *
-     * @todo make the exclude configurable
      * @param int|string $statusCode
      *
      * @return bool
      */
     protected function isExcludedStatusCode($statusCode): bool
     {
-        $excludedStatusCodes = [];
+        $excludedStatusCodes = \is_array($this->excludeStatusCodes) ? $this->excludeStatusCodes : [];
         return \in_array($statusCode, $excludedStatusCodes, true);
     }
 }
