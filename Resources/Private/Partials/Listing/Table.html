@@ -1,15 +1,23 @@
 <table class="neos-table">
   <thead>
     <tr>
-      <th>URL</th>
-      <th>Quelle</th>
-      <th>Status</th>
-      <th>Letzte Prüfung</th>
+      <th>
+        <f:translate id="backend.module.table.header.url" source="Modules">url</f:translate>
+      </th>
+      <th>
+        <f:translate id="backend.module.table.header.origin" source="Modules">origin</f:translate>
+      </th>
+      <th>
+        <f:translate id="backend.module.table.header.status" source="Modules">status code</f:translate>
+      </th>
+      <th>
+        <f:translate id="backend.module.table.header.latest_check" source="Modules">checked at</f:translate>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <f:for as="item" each="{items}">
-      <f:render partial="Listing/TableRow" arguments="{item: item}" />
-    </f:for>
+  <f:for as="item" each="{items}">
+    <f:render partial="Listing/TableRow" arguments="{item: item}"/>
+  </f:for>
   </tbody>
 </table>

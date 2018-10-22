@@ -36,6 +36,10 @@ Noerdisch:
 
 Neos:
   Neos:
+    userInterface:
+      translation:
+        autoInclude:
+          'Noerdisch.LinkChecker': ['Modules']
     modules:
       management:
         submodules:

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="Noerdisch.LinkChecker" source-language="en" datatype="plaintext">
+        <body>
+            <trans-unit id="backend.module.table.header.url" xml:space="preserve">
+                <source>URL</source>
+            </trans-unit>
+            <trans-unit id="backend.module.table.header.origin" xml:space="preserve">
+                <source>Origin URL</source>
+            </trans-unit>
+            <trans-unit id="backend.module.table.header.status" xml:space="preserve">
+                <source>Status code</source>
+            </trans-unit>
+            <trans-unit id="backend.module.table.header.latest_check" xml:space="preserve">
+                <source>Checked at</source>
+            </trans-unit>
+            <trans-unit id="backend.module.no_items" xml:space="preserve">
+                <source>No Items for the status code has been found.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
