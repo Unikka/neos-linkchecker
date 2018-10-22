@@ -65,7 +65,8 @@ class ResultItemRepository extends Repository
      */
     public function findAllStatusCodes()
     {
-        $dql = "SELECT DISTINCT t.statusCode FROM Noerdisch\LinkChecker\Domain\Model\ResultItem t";
+        $dql = "SELECT DISTINCT t.statusCode FROM Noerdisch\LinkChecker\Domain\Model\ResultItem t ";
+        $dql .= "WHERE t.statusCode > 0 ORDER BY t.statusCode ASC";
         $statusCodes = $this->createDqlQuery($dql)->getArrayResult();
 
         $existingStatusCodes = [];
