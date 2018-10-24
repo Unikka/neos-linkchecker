@@ -102,7 +102,6 @@ class EmailService implements NotificationServiceInterface
         $htmlBody = $this->renderEmailBody('html', $variables);
         $senderAddress = $this->resolveSenderAddress($sender);
         $recipientAddress = $this->resolveRecipientAddress($recipient);
-        \Neos\Flow\var_dump($plaintextBody);
 
         $mail = new Message();
         $mail->setFrom($senderAddress)
@@ -136,7 +135,6 @@ class EmailService implements NotificationServiceInterface
         $standaloneView->setTemplatePathAndFilename($templatePathAndFilename);
         $standaloneView->setLayoutRootPath($rootPath . 'Layouts');
         $standaloneView->setPartialRootPath($rootPath . 'Partials');
-        \Neos\Flow\var_dump($variables);
         $standaloneView->assignMultiple($variables);
 
         return $standaloneView->render();
