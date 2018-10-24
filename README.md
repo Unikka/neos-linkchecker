@@ -4,8 +4,8 @@
     </a>
 </p>
 
-[![Packagist](https://img.shields.io/packagist/l/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/neos.linkchecker)
-[![Packagist](https://img.shields.io/packagist/v/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/neos.linkchecker)
+[![Packagist](https://img.shields.io/packagist/l/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/linkchecker)
+[![Packagist](https://img.shields.io/packagist/v/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/linkchecker)
 [![Twitter Follow](https://img.shields.io/twitter/follow/noerdisch.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/noerdisch)
 
 # Neos.LinkChecker
