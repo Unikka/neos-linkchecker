@@ -62,6 +62,8 @@ class BackendController extends AbstractModuleController
 
         $existingStatusCodes = $this->resultItemRepository->findAllStatusCodes();
         $existingStatusCodes[] = $statusCode;
-        return array_unique($existingStatusCodes);
+        $existingStatusCodes = array_unique($existingStatusCodes);
+        sort($existingStatusCodes);
+        return $existingStatusCodes;
     }
 }
