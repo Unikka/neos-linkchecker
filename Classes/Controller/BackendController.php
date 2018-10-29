@@ -22,7 +22,11 @@ use Noerdisch\LinkChecker\Domain\Repository\ResultItemRepository;
  */
 class BackendController extends AbstractModuleController
 {
-    public const DEFAULT_STATUS_CODE = 404;
+    /**
+     * @var int
+     * @Flow\InjectConfiguration(path="notifications.minimumStatusCode")
+     */
+    protected $minimumStatusCode;
 
     /**
      * @Flow\Inject
@@ -40,12 +44,42 @@ class BackendController extends AbstractModuleController
      */
     public function indexAction($statusCode = 0): void
     {
-        $resultItems = $this->resultItemRepository->findByStatusCode($statusCode)->toArray();
+        $statusCodes = $this->getStatusCodes();
+        $statusCodePreSelect = $this->getStatusCodePreSelect($statusCode, $statusCodes);
+        $resultItems = $statusCodePreSelect > 0 ? $this->resultItemRepository->findByStatusCode($statusCodePreSelect)->toArray() : [];
+
         $this->view->assignMultiple([
             'resultItems' => $resultItems,
-            'statusCodes' => $this->getStatusCodes($statusCode),
-            'activeStatusCode' => $statusCode < 100 ? self::DEFAULT_STATUS_CODE : $statusCode
+            'statusCodes' => $statusCodes,
+            'activeStatusCode' => $statusCodePreSelect
         ]);
+    }
+
+    /**
+     * If we have a minimal status code configured and the given status code is invalid, then we try to select the
+     * first possible status code that matches the configuration for "notifications.minimumStatusCode".
+     *
+     * @param int $statusCode
+     * @param array $allStatusCodes
+     * @return int
+     */
+    protected function getStatusCodePreSelect($statusCode, array $allStatusCodes) {
+        $minimumStatusCode = (int)$this->minimumStatusCode;
+        if ($statusCode > 0 || $minimumStatusCode <= 0) {
+            return (int) $statusCode;
+        }
+
+        $preSelect = 0;
+        foreach ($allStatusCodes as $statusCodeNumber) {
+            if ($statusCodeNumber <= $minimumStatusCode) {
+                continue;
+            }
+
+            $preSelect = $statusCodeNumber;
+            break;
+        }
+
+        return $preSelect;
     }
 
     /**
@@ -55,14 +89,9 @@ class BackendController extends AbstractModuleController
      * @param int $statusCode
      * @return array
      */
-    protected function getStatusCodes($statusCode) {
-        if ((int) $statusCode < 100) {
-            $statusCode = self::DEFAULT_STATUS_CODE;
-        }
-
+    protected function getStatusCodes(): array
+    {
         $existingStatusCodes = $this->resultItemRepository->findAllStatusCodes();
-        $existingStatusCodes[] = $statusCode;
-        $existingStatusCodes = array_unique($existingStatusCodes);
         sort($existingStatusCodes);
         return $existingStatusCodes;
     }
