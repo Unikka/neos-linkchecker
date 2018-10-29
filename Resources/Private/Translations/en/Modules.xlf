@@ -17,6 +17,9 @@
             <trans-unit id="backend.module.no_items" xml:space="preserve">
                 <source>No Items for the status code has been found.</source>
             </trans-unit>
+            <trans-unit id="backend.module.no_status_code_match" xml:space="preserve">
+                <source>The preselected status code "{0}" does not match the existing codes. The minimumStatusCode configuration is to high or you have no issues with higher codes.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

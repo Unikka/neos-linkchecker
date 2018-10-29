@@ -17,6 +17,9 @@
             <trans-unit id="backend.module.no_items" xml:space="preserve" approved="yes">
                 <source>Es wurden keine Eintrage mit diesen Status gefunden.</source>
             </trans-unit>
+            <trans-unit id="backend.module.no_status_code_match" xml:space="preserve">
+                <source>Der vorausgewählte Status-Code "{0}" konnte nicht zugeordnet werden. Die Konfiguration "minimumStatusCode" ist zu hoch eingestellt oder Sie haben keine zuordnungsfähigen Daten.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
