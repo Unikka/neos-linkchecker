@@ -1,9 +1,13 @@
 <tr>
   <td>
-    <f:format.crop maxCharacters="75">{item.url}</f:format.crop>
+    <f:link.external uri="{item.url}" target="_blank">
+      <f:format.crop maxCharacters="75">{item.url}</f:format.crop>
+    </f:link.external>
   </td>
   <td>
-    <f:format.crop maxCharacters="75">{item.originUrl}</f:format.crop>
+    <f:link.external uri="{item.originUrl}" target="_blank">
+      <f:format.crop maxCharacters="75">{item.originUrl}</f:format.crop>
+    </f:link.external>
   </td>
   <td>{item.statusCode}</td>
   <td>{item.checkedAt -> f:format.date(format: 'H:i - d.m.Y')}</td>
