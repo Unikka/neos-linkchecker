@@ -30,4 +30,4 @@ It is really easy, when you always commit via `yarn commit`. Commitizen will gui
 If you have questions just ping us on twitter or github.
 
 ## License
-The GPL-3.0-or-later, please see [License File](LICENSE) for more information.
+The MIT License (MIT), please see [License File](LICENSE) for more information.
