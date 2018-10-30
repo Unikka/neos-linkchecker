@@ -29,6 +29,12 @@ Noerdisch:
         template:
           package: 'Noerdisch.LinkChecker'
           file: 'NotificationMail'
+        attachment:
+          enableMailAttachment: true
+          csvHeader:
+            - 'Status code'
+            - 'URL'
+            - 'Origin URL'
         logging:
           errors: log
           success: log

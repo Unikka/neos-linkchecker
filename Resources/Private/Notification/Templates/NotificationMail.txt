@@ -5,5 +5,5 @@ Link check summary:
     - Crawled {resultItem.amount} url(s) with status code {resultItem.statusCode}
 </f:for>
 
-You can find more details in the LinkChecker backend module.
+You can find more details in the LinkChecker in the attached CSV report file.
 

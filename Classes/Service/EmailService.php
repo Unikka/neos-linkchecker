@@ -14,8 +14,12 @@ namespace Noerdisch\LinkChecker\Service;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Configuration\ConfigurationManager;
+use Neos\Flow\Utility\Now;
 use Neos\FluidAdaptor\View\StandaloneView;
 use Neos\SwiftMailer\Message;
+use League\Csv\Writer;
+use Noerdisch\LinkChecker\Domain\Model\ResultItem;
+use Swift_Attachment;
 
 /**
  * @Flow\Scope("singleton")
@@ -55,6 +59,12 @@ class EmailService implements NotificationServiceInterface
      * @Flow\InjectConfiguration(path="notifications.mail.template")
      */
     protected $template;
+
+    /**
+     * @var array
+     * @Flow\InjectConfiguration(path="notifications.mail.attachment")
+     */
+    protected $attachment;
 
     /**
      * @var string
@@ -110,7 +120,43 @@ class EmailService implements NotificationServiceInterface
             ->setBody($plaintextBody)
             ->addPart($htmlBody, 'text/html');
 
+        if (isset($this->attachment['enableMailAttachment']) && (bool)$this->attachment['enableMailAttachment']) {
+            $attachment = $this->generateCsvAttachment($variables);
+            $mail->attach($attachment);
+        }
+
         return $this->sendMail($mail);
+    }
+
+    /**
+     * Generates a CSV file with the status code, failing url and  origin url as columns.
+     *
+     * @param array $variables
+     * @return Swift_Attachment
+     * @throws \League\Csv\CannotInsertRecord
+     */
+    protected function generateCsvAttachment(array $variables) {
+        $csvHeader = $this->attachment['csvHeader'] ?? ['Status', 'URL', 'Origin'];
+        $contentRows = [];
+
+        foreach ($variables['result'] as $statusCode => $urlRecord) {
+            if (!($urlRecord instanceof ResultItem)) {
+                continue;
+            }
+
+            /** @var ResultItem $urlRecord */
+            $contentRows[] = [
+                $statusCode,
+                $urlRecord->getUrl(),
+                $urlRecord->getOriginUrl()
+            ];
+        }
+
+        $csv = Writer::createFromString('');
+        $csv->insertOne($csvHeader);
+        $csv->insertAll($contentRows);
+
+        return new Swift_Attachment($csv->getContent(), 'LinkCheckerReport_' . Now::W3C . '.csv', 'text/csv');
     }
 
     /**
