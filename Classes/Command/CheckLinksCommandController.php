@@ -201,10 +201,7 @@ class CheckLinksCommandController extends CommandController
         }
 
         $minimumStatusCode = \is_numeric($this->minimumStatusCode) ? $this->minimumStatusCode : self::MIN_STATUS_CODE;
-        $arguments = [
-            'urls' => [],
-            'statusCodes' => []
-        ];
+        $arguments = [];
         foreach ($results as $statusCode => $urls) {
             if ($statusCode < $minimumStatusCode) {
                 continue;
