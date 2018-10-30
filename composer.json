@@ -8,7 +8,8 @@
         "neos/flow": "*",
         "neos/neos": "~4.0",
         "neos/swiftmailer": "^6.0",
-        "spatie/crawler": "^4.1"
+        "spatie/crawler": "^4.1",
+        "league/csv": "^9.1"
     },
     "autoload": {
         "psr-4": {
