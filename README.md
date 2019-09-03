@@ -18,6 +18,28 @@ Neos package that is able to crawl the whole page and check the links for broken
 composer require unikka/neos-linkchecker --no-update
 ```
 
+We collect the result items in the database and therefore you should execute
+the doctrine migration.
+
+```bash
+./flow doctrine:migrate
+```
+
+## Configuration
+
+We have plenty of configuration options for the link checker.
+the most important if you want to use the crawler for your site is maybe
+the url. You can also use a parameter in the cli command if you don`t use just
+one url for instance.
+
+```yaml
+Unikka:
+  LinkChecker:
+    url: 'unikka.de'
+```
+
+More detailed information will follow.
+At the moment just check out the ```Settings.yaml```
 
 ## Contribution
 
