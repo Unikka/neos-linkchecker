@@ -3,6 +3,7 @@
 </p>
 
 [![Packagist](https://img.shields.io/packagist/l/unikka/neos-linkchecker.svg?style=flat-square)](https://packagist.org/packages/unikka/neos-linkchecker)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/Unikka/neos-linkchecker)
 [![Packagist](https://img.shields.io/packagist/v/unikka/neos-linkchecker.svg?style=flat-square)](https://packagist.org/packages/unikka/neos-linkchecker)
 [![Twitter Follow](https://img.shields.io/twitter/follow/unikka_de.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/unikka_de)
 
