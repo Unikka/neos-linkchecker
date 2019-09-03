@@ -1,8 +1,8 @@
-Noerdisch:
+Unikka:
   LinkChecker:
     url: ''
-    defaultProfile: 'Noerdisch\LinkChecker\Profile\CheckAllLinks'
-    defaultReporter: 'Noerdisch\LinkChecker\Reporter\LogBrokenLinks'
+    defaultProfile: 'Unikka\LinkChecker\Profile\CheckAllLinks'
+    defaultReporter: 'Unikka\LinkChecker\Reporter\LogBrokenLinks'
     concurrency: 10
     ignoreRobots: true
     excludeStatusCodes: []
@@ -14,20 +14,20 @@ Noerdisch:
       auth: []
     notifications:
       enabled: true
-      service: 'Noerdisch\LinkChecker\Service\EmailService'
+      service: 'Unikka\LinkChecker\Service\EmailService'
       subject: 'Link checker results'
       minimumStatusCode: 400
       mail:
         sender:
           default:
-            name: 'Noerdisch'
+            name: 'Unikka'
             address: 'test@example.com'
         recipient:
           default:
-            name: 'Noerdisch'
+            name: 'Unikka'
             address: 'test@example.com'
         template:
-          package: 'Noerdisch.LinkChecker'
+          package: 'Unikka.LinkChecker'
           file: 'NotificationMail'
         attachment:
           enableMailAttachment: true
@@ -45,13 +45,13 @@ Neos:
     userInterface:
       translation:
         autoInclude:
-          'Noerdisch.LinkChecker': ['Modules']
+          'Unikka.LinkChecker': ['Modules']
     modules:
       management:
         submodules:
           linkchecker:
             label: 'Link Checker Module'
-            controller: 'Noerdisch\LinkChecker\Controller\BackendController'
+            controller: 'Unikka\LinkChecker\Controller\BackendController'
             description: 'Backend Modules for listing crawling states for URLs and images'
             icon: 'fas fa-link'
-            privilegeTarget: 'Noerdisch.LinkChecker:Backend.Module.Management.LinkChecker'
+            privilegeTarget: 'Unikka.LinkChecker:Backend.Module.Management.LinkChecker'

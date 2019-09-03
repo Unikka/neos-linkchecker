@@ -1,11 +1,11 @@
 <?php
 
-namespace Noerdisch\LinkChecker\Command;
+namespace Unikka\LinkChecker\Command;
 
 /*
- * This file is part of the Noerdisch.LinkChecker package.
+ * This file is part of the Unikka LinkChecker package.
  *
- * (c) Noerdisch - Digital Solutions www.noerdisch.com
+ * (c) unikka
  *
  * This package is Open Source Software. For the full copyright and license
  * information, please view the LICENSE file which was distributed with this
@@ -15,21 +15,21 @@ namespace Noerdisch\LinkChecker\Command;
 use GuzzleHttp\RequestOptions;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
-use Noerdisch\LinkChecker\Profile\CheckAllLinks;
-use Noerdisch\LinkChecker\Reporter\LogBrokenLinks;
-use Noerdisch\LinkChecker\Service\NotificationServiceInterface;
+use Unikka\LinkChecker\Profile\CheckAllLinks;
+use Unikka\LinkChecker\Reporter\LogBrokenLinks;
+use Unikka\LinkChecker\Service\NotificationServiceInterface;
 use Spatie\Crawler\Crawler;
 
 /**
  * Class CheckLinksCommandController
- * @package Noerdisch\LinkChecker\Command
+ * @package Unikka\LinkChecker\Command
  */
 class CheckLinksCommandController extends CommandController
 {
     public const MIN_STATUS_CODE = 404;
 
     /**
-     * @Flow\InjectConfiguration(package="Noerdisch.LinkChecker")
+     * @Flow\InjectConfiguration(package="Unikka.LinkChecker")
      * @var array
      */
     protected $settings;
@@ -137,7 +137,7 @@ class CheckLinksCommandController extends CommandController
     }
 
     /**
-     * Returns true by default and can be changed by the setting Noerdisch.LinkChecker.ignoreRobots
+     * Returns true by default and can be changed by the setting Unikka.LinkChecker.ignoreRobots
      *
      * @return bool
      */

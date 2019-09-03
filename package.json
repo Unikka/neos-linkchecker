@@ -1,5 +1,5 @@
 {
-  "name": "noerdisch.linkchecker",
+  "name": "unikka.linkchecker",
   "version": "0.0.0",
   "description": "Neos package that is able to crawl the whole page and check the links for broken links",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noerdisch/Neos.LinkChecker.git"
+    "url": "git+https://github.com:Unikka/neos-linkchecker.git"
   },
   "keywords": [
     "neos",
@@ -19,9 +19,9 @@
   "author": "Markus Günther",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/noerdisch/Neos.LinkChecker/issues"
+    "url": "https://github.com/Unikka/neos-linkchecker/issues"
   },
-  "homepage": "https://github.com/noerdisch/Neos.LinkChecker#readme",
+  "homepage": "https://github.com/Unikka/neos-linkchecker#readme",
   "dependencies": {
     "commitizen": "^3.0.2",
     "conventional-changelog-eslint": "^3.0.0",

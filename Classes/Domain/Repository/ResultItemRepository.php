@@ -1,11 +1,11 @@
 <?php
 
-namespace Noerdisch\LinkChecker\Domain\Repository;
+namespace Unikka\LinkChecker\Domain\Repository;
 
 /*
- * This file is part of the Noerdisch.LinkChecker package.
+ * This file is part of the Unikka LinkChecker package.
  *
- * (c) Noerdisch - Digital Solutions www.noerdisch.com
+ * (c) unikka
  *
  * This package is Open Source Software. For the full copyright and license
  * information, please view the LICENSE file which was distributed with this
@@ -14,7 +14,7 @@ namespace Noerdisch\LinkChecker\Domain\Repository;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\Doctrine\Repository;
-use Noerdisch\LinkChecker\Domain\Model\ResultItem;
+use Unikka\LinkChecker\Domain\Model\ResultItem;
 
 /**
  * @Flow\Scope("singleton")
@@ -65,7 +65,7 @@ class ResultItemRepository extends Repository
      */
     public function findAllStatusCodes()
     {
-        $dql = "SELECT DISTINCT t.statusCode FROM Noerdisch\LinkChecker\Domain\Model\ResultItem t ";
+        $dql = "SELECT DISTINCT t.statusCode FROM Unikka\LinkChecker\Domain\Model\ResultItem t ";
         $dql .= "WHERE t.statusCode > 0 ORDER BY t.statusCode ASC";
         $statusCodes = $this->createDqlQuery($dql)->getArrayResult();
 

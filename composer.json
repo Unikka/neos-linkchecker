@@ -1,7 +1,7 @@
 {
     "description": "NeosCMS package that is able to crawl the whole page and check the links for broken links",
     "type": "neos-package",
-    "name": "noerdisch/linkchecker",
+    "name": "unikka/neos-linkchecker",
     "license": "MIT",
     "require": {
         "php" : "^7.1",
@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Noerdisch\\LinkChecker\\": "Classes/"
+            "Unikka\\LinkChecker\\": "Classes/"
         }
     },
     "extra": {
         "neos": {
-            "package-key": "Noerdisch.LinkChecker"
+            "package-key": "Unikka.LinkChecker"
         }
     }
 }

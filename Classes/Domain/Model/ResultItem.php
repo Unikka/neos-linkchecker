@@ -1,11 +1,11 @@
 <?php
 
-namespace Noerdisch\LinkChecker\Domain\Model;
+namespace Unikka\LinkChecker\Domain\Model;
 
 /*
- * This file is part of the Noerdisch.LinkChecker package.
+ * This file is part of the Unikka LinkChecker package.
  *
- * (c) Noerdisch - Digital Solutions www.noerdisch.com
+ * (c) unikka
  *
  * This package is Open Source Software. For the full copyright and license
  * information, please view the LICENSE file which was distributed with this
@@ -13,13 +13,13 @@ namespace Noerdisch\LinkChecker\Domain\Model;
  */
 
 use Neos\Flow\Annotations as Flow;
-use Noerdisch\LinkChecker\Service\UriService;
+use Unikka\LinkChecker\Service\UriService;
 use Psr\Http\Message\UriInterface;
 
 /**
  * Model ResultItem
  *
- * @package Noerdisch\LinkChecker\Domain\Model
+ * @package Unikka\LinkChecker\Domain\Model
  * @Flow\Entity
  */
 class ResultItem

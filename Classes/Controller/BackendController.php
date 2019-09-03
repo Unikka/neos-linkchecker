@@ -1,11 +1,11 @@
 <?php
 
-namespace Noerdisch\LinkChecker\Controller;
+namespace Unikka\LinkChecker\Controller;
 
 /*
- * This file is part of the Noerdisch.LinkChecker package.
+ * This file is part of the Unikka LinkChecker package.
  *
- * (c) Noerdisch - Digital Solutions www.noerdisch.com
+ * (c) unikka
  *
  * This package is Open Source Software. For the full copyright and license
  * information, please view the LICENSE file which was distributed with this
@@ -14,11 +14,11 @@ namespace Noerdisch\LinkChecker\Controller;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Controller\Module\AbstractModuleController;
-use Noerdisch\LinkChecker\Domain\Repository\ResultItemRepository;
+use Unikka\LinkChecker\Domain\Repository\ResultItemRepository;
 
 /**
  * Class BackendController
- * @package Noerdisch\LinkChecker\Controller
+ * @package Unikka\LinkChecker\Controller
  */
 class BackendController extends AbstractModuleController
 {

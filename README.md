@@ -1,12 +1,10 @@
 <p align="center">
-    <a href="https://www.noerdisch.de" target="_blank">
-        <img src="https://cdn.rawgit.com/markusguenther/abe70d34f4a4621aed0ef504c5d0192b/raw/5bf0f3df328e58ba7aad067a56cbd1c15ef69491/logo_full.svg" width="300">
-    </a>
+  <img src="https://cdn.jsdelivr.net/gh/unikka/unikka.de/src/assets/unikka_with_background.svg" width="300" />
 </p>
 
-[![Packagist](https://img.shields.io/packagist/l/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/linkchecker)
-[![Packagist](https://img.shields.io/packagist/v/noerdisch/linkchecker.svg?style=flat-square)](https://packagist.org/packages/noerdisch/linkchecker)
-[![Twitter Follow](https://img.shields.io/twitter/follow/noerdisch.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/noerdisch)
+[![Packagist](https://img.shields.io/packagist/l/unikka/neos-linkchecker.svg?style=flat-square)](https://packagist.org/packages/unikka/neos-linkchecker)
+[![Packagist](https://img.shields.io/packagist/v/unikka/neos-linkchecker.svg?style=flat-square)](https://packagist.org/packages/unikka/neos-linkchecker)
+[![Twitter Follow](https://img.shields.io/twitter/follow/unikka_de.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/unikka_de)
 
 # Neos.LinkChecker
 
@@ -17,7 +15,7 @@ Neos package that is able to crawl the whole page and check the links for broken
 ## Installation
 
 ```bash
-composer require noerdisch/linkchecker
+composer require unikka/neos-linkchecker --no-update
 ```
 
 
@@ -28,6 +26,11 @@ Therefore the first rule is to follow the [eslint commit message guideline](http
 It is really easy, when you always commit via `yarn commit`. Commitizen will guide you.
 
 If you have questions just ping us on twitter or github.
+
+## About
+
+The package is based on the `Noerdisch/LinkChecker` package. We thank the Noerdisch team for
+all the efforts.
 
 ## License
 The MIT License (MIT), please see [License File](LICENSE) for more information.

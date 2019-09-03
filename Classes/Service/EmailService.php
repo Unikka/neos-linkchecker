@@ -1,11 +1,11 @@
 <?php
 
-namespace Noerdisch\LinkChecker\Service;
+namespace Unikka\LinkChecker\Service;
 
 /*
- * This file is part of the Noerdisch.LinkChecker package.
+ * This file is part of the Unikka LinkChecker package.
  *
- * (c) Noerdisch - Digital Solutions www.noerdisch.com
+ * (c) unikka
  *
  * This package is Open Source Software. For the full copyright and license
  * information, please view the LICENSE file which was distributed with this
@@ -18,7 +18,7 @@ use Neos\Flow\Utility\Now;
 use Neos\FluidAdaptor\View\StandaloneView;
 use Neos\SwiftMailer\Message;
 use League\Csv\Writer;
-use Noerdisch\LinkChecker\Domain\Model\ResultItem;
+use Unikka\LinkChecker\Domain\Model\ResultItem;
 use Swift_Attachment;
 
 /**
@@ -169,7 +169,7 @@ class EmailService implements NotificationServiceInterface
      */
     public function renderEmailBody(string $format, array $variables): string
     {
-        $packageName = $this->template['package'] ?? 'Noerdisch.LinkChecker';
+        $packageName = $this->template['package'] ?? 'Unikka.LinkChecker';
         $templateName = $this->template['file'] ?? 'NotificationMail';
         $rootPath = sprintf('resource://%s/Private/Notification/', $packageName);
         $templatePathAndFilename = $rootPath . sprintf('Templates/%s.%s', $templateName, $format);
@@ -218,12 +218,12 @@ class EmailService implements NotificationServiceInterface
         }
         if (!isset($addressesConfig[$addressKeyOrAddresses])) {
             $errorMessage = 'The given address string was not found in config. Please check config path';
-            $errorMessage .= ' "Noerdisch.LinkChecker.%s.%s".';
+            $errorMessage .= ' "Unikka.LinkChecker.%s.%s".';
             throw new \RuntimeException(sprintf($errorMessage, $description, $addressKeyOrAddresses), 1540192171);
         }
         if (!isset($addressesConfig[$addressKeyOrAddresses]['name'], $addressesConfig[$addressKeyOrAddresses]['address'])) {
             $errorMessage = 'The given sender is not correctly configured - "name" or "address" are missing.';
-            $errorMessage .= ' Please check config path "Noerdisch.LinkChecker.%s.%s".';
+            $errorMessage .= ' Please check config path "Unikka.LinkChecker.%s.%s".';
             throw new \RuntimeException(sprintf($errorMessage, $description, $addressKeyOrAddresses), 1540192180);
         }
         return [$addressesConfig[$addressKeyOrAddresses]['address'] => $addressesConfig[$addressKeyOrAddresses]['name']];
