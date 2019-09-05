@@ -15,6 +15,7 @@ namespace Unikka\LinkChecker\Domain\Model;
 use Neos\Flow\Annotations as Flow;
 use Unikka\LinkChecker\Service\UriService;
 use Psr\Http\Message\UriInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Model ResultItem
@@ -36,12 +37,14 @@ class ResultItem
 
     /**
      * @var string
+     * @ORM\Column(length=2048)
      */
     protected $originUrl = '';
 
     /**
      * @var string
      * @Flow\Validate(type="NotEmpty")
+     * @ORM\Column(length=2048)
      */
     protected $url = '';
 
