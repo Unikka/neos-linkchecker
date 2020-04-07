@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Unikka/neos-linkchecker#readme",
   "dependencies": {
-    "commitizen": "^4.0.3",
+    "commitizen": "^4.0.4",
     "conventional-changelog-eslint": "^3.0.1",
     "cz-adapter-eslint": "^0.3.0"
   },
