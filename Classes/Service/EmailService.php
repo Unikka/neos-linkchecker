@@ -18,6 +18,7 @@ use Neos\Flow\Utility\Now;
 use Neos\FluidAdaptor\View\StandaloneView;
 use Neos\SwiftMailer\Message;
 use League\Csv\Writer;
+use Psr\Log\LoggerInterface;
 use Unikka\LinkChecker\Domain\Model\ResultItem;
 use Swift_Attachment;
 
@@ -32,9 +33,9 @@ class EmailService implements NotificationServiceInterface
 
     /**
      * @Flow\Inject
-     * @var \Neos\Flow\Log\SystemLoggerInterface
+     * @var LoggerInterface
      */
-    protected $systemLogger;
+    protected $logger;
 
     /**
      * @Flow\Inject
@@ -88,7 +89,7 @@ class EmailService implements NotificationServiceInterface
         try {
             $this->sendEmail($subject, $variables);
         } catch (\Exception $exception) {
-            $this->systemLogger->log($exception->getMessage(), LOG_ERR);
+            $this->logger->error($exception->getMessage());
         }
     }
 
@@ -248,7 +249,7 @@ class EmailService implements NotificationServiceInterface
         } catch (\Exception $exception) {
             $exceptionMessage = $exception->getMessage();
             if ($this->logErrors === self::LOG_LEVEL_LOG) {
-                $this->systemLogger->log($exception->getMessage(), LOG_ERR);
+                $this->logger->error($exception->getMessage());
             } elseif ($this->logErrors === self::LOG_LEVEL_THROW) {
                 throw $exception;
             }
@@ -265,14 +266,14 @@ class EmailService implements NotificationServiceInterface
         }
 
         if ($actualNumberOfRecipients < $totalNumberOfRecipients && $this->logErrors === self::LOG_LEVEL_LOG) {
-            $this->systemLogger->log(
+            $this->logger->error(
                 sprintf('Could not send an email to all given recipients. Given %s, sent to %s', $totalNumberOfRecipients, $actualNumberOfRecipients),
-                LOG_ERR, $emailInfo);
+                $emailInfo);
             return false;
         }
 
         if ($this->logSuccess === self::LOG_LEVEL_LOG) {
-            $this->systemLogger->log('Email sent successfully.', LOG_INFO, $emailInfo);
+            $this->logger->info('Email sent successfully.', $emailInfo);
         }
         return true;
     }
