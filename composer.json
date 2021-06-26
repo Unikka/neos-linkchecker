@@ -7,7 +7,7 @@
         "php" : "^7.1",
         "neos/flow": "*",
         "neos/neos": "^4.0 || ^5.0 || ^7.0 || dev-master",
-        "neos/swiftmailer": "^6.0 || ^7.0 || dev-master",",
+        "neos/swiftmailer": "^6.0 || ^7.0 || dev-master",
         "spatie/crawler": "^4.1",
         "league/csv": "^9.1"
     },
