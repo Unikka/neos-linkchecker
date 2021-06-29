@@ -19,7 +19,7 @@
     "crawler"
   ],
   "author": "Markus Günther",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/Unikka/neos-linkchecker/issues"
   },
