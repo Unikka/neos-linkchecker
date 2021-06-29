@@ -56,4 +56,4 @@ The package is based on the `Noerdisch/LinkChecker` package. We thank the Noerdi
 all the efforts.
 
 ## License
-The MIT License (MIT), please see [License File](LICENSE) for more information.
+The GNU GENERAL PUBLIC LICENSE, please see [License File](LICENSE) for more information.
