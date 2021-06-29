@@ -2,7 +2,7 @@
     "description": "NeosCMS package that is able to crawl the whole page and check the links for broken links",
     "type": "neos-package",
     "name": "unikka/neos-linkchecker",
-    "license": "MIT",
+    "license": "GPL-3.0-or-later",
     "require": {
         "php" : "^7.1",
         "neos/flow": "*",
