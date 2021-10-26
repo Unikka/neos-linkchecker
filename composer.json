@@ -24,7 +24,8 @@
             "Neos.Twitter.Bootstrap-20161124204912",
             "Neos.Party-20161124225257",
             "Neos.Imagine-20161124231742",
-            "Neos.SwiftMailer-20161130105617"
+            "Neos.SwiftMailer-20161130105617",
+            "Neos.ContentRepository.Search-20161210231100"
         ]
     }
 }
