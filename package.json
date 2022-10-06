@@ -28,7 +28,7 @@
     "commitizen": "^4.2.4",
     "conventional-changelog-eslint": "^3.0.1",
     "cz-adapter-eslint": "^0.3.0",
-    "snyk": "^1.667.0"
+    "snyk": "^1.996.0"
   },
   "config": {
     "commitizen": {
